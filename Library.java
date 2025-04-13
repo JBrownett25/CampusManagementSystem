@@ -1,66 +1,71 @@
+
 import javax.swing.*;
 import java.awt.*;
+import java.io.*;
+import java.util.ArrayList;
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
-/*public class Library {
 
-    //private String student;
-    //private int course;
-    //private String bookName;
+public class Library {
+
 
     public void runGUI() {
         LibraryGUI libGUI = new LibraryGUI();
         libGUI.libraryGUI(); //Method to run GUI when linked to the mainGUI
     }
 
-    public void getBook() {
+    public void getBook(String find) {
 
+
+        ArrayList<String> books = new ArrayList<>(); //Initialise ArrayList to add titles of books from CSV.
+
+        try (BufferedReader reader = new BufferedReader(new FileReader("Library.csv"))) { //Read file
+            String line; //Declare line
+            while ((line = reader.readLine()) != null) { //While to iterate through books
+                String titles = line.split(",")[0]; //Only first Index (book titles) because this is what user searches for.
+                books.add(titles); // Add titles to ArrayList
+
+            }
+        } catch (IOException e) { //Error handling in catch
+            throw new RuntimeException(e);
+        }
+
+
+
+        if (books.contains(find)) {
+
+            try (BufferedReader reader = new BufferedReader(new FileReader("Library.csv"))) {
+                String line;
+               while((line = reader.readLine()) != null) {
+                   if (line.contains(find)) {
+                       System.out.println(line);
+                       detailsGUI(find, line);
+                   }
+               }
+            }catch (IOException e) {
+                System.out.println("Error reading file");
+                throw new RuntimeException(e);
+            }
+
+        }
     }
-}*/
+    public void detailsGUI(String find, String bookLine) {
+        JFrame bookFrame; //Run a new frame
+        bookFrame = new JFrame("Book Title: " + find);
+        bookFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        bookFrame.setSize(600, 600);
 
+        JPanel bookPanel = new JPanel();
 
-class LibraryGUI extends JFrame {
+        JTextArea BookDetails = new JTextArea();
+        BookDetails.setFont(new Font("Arial", Font.PLAIN, 30));
+        BookDetails.setEditable(false);
+        BookDetails.setText(bookLine); //Add details of the user's book to the TextArea.
+        bookPanel.add(BookDetails);
 
-    public void libraryGUI() {
-        setTitle("Library"); //title
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Close frame
-        setSize(600, 600);
-        setVisible(true); //Loads frame for user.
-
-        JPanel panel = new JPanel();
-        panel.setLayout(new GridBagLayout()); //Layout manager
-        GridBagConstraints con = new GridBagConstraints(); //introduce the constraints object.
-
-        JLabel header = new JLabel("Library Information"); // Label and text
-        header.setFont(new Font("Arial", Font.PLAIN, 50)); // Set font style
-        con.gridx = 0;
-        con.gridy = 0;
-        con.gridwidth = 3;
-        con.gridheight = 1;
-        panel.add(header, con); // Add to panel with contraints.
-
-
-        JTextField bookText = new JTextField();
-        bookText.setFont(new Font("Arial", Font.PLAIN, 30));
-        con.gridx = 2;
-        con.gridy = 1;
-        con.gridwidth = 2;
-        con.fill = GridBagConstraints.HORIZONTAL; // Cover whole 2 columns
-        panel.add(bookText, con);
-
-        JButton findBook = new JButton("Find Book");
-        findBook.setFont(new Font("Arial", Font.PLAIN, 30));
-        con.gridx = 1;//button on left of TextField.
-        con.gridy = 1;
-        con.gridwidth = 1;
-        con.gridheight = 1;
-        panel.add(findBook, con);
-        /*findBook.addActionListener(e -> { //Lambda method for actionlistener.
-            bookText.getText();
-            Library lib = new LibraryGUI();
-            lib.getBook();
-        });*/
-
-        add(panel); // Add panel to JFrame.
+        bookFrame.add(bookPanel);
+        bookFrame.setVisible(true);
     }
 }
+
 
