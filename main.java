@@ -1,10 +1,12 @@
 import javax.swing.*;
 
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+
 public class main {
     public static void main(String[] args) {
 // Temporary main until final GUI is made.
         JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setSize(500,500);
         frame.setTitle("Library GUI");
 

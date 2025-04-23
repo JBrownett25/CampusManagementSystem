@@ -5,7 +5,7 @@ public class LibraryGUI extends JFrame {
 
     public void libraryGUI() {
         setTitle("Library"); //title
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Close frame
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); //Close frame
         setSize(600, 600);
         setVisible(true); //Loads frame for user.
 

@@ -3,7 +3,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 
 public class Library {
@@ -30,28 +29,25 @@ public class Library {
             throw new RuntimeException(e);
         }
 
-
-
         if (books.contains(find)) {
 
             try (BufferedReader reader = new BufferedReader(new FileReader("Library.csv"))) {
                 String line;
-               while((line = reader.readLine()) != null) {
-                   if (line.contains(find)) {
+                while ((line = reader.readLine()) != null) {
+                    if (line.contains(find)) {
 
-                       String name = line.split(",")[0];
-                       String author = line.split(",")[1];
-                       String course = line.split(",")[2];
-                       String copies = line.split(",")[3];
+                        String name = line.split(",")[0];
+                        String author = line.split(",")[1];
+                        String course = line.split(",")[2];
+                        String copies = line.split(",")[3];
 
-                       detailsGUI(find, name, author, course, copies);
-                       break;
+                        detailsGUI(find, name, author, course, copies);
+                        break;
 
 
-
-                   }
-               }
-            }catch (IOException e) {
+                    }
+                }
+            } catch (IOException e) {
                 System.out.println("Error reading file");
                 throw new RuntimeException(e);
             }
@@ -64,9 +60,9 @@ public class Library {
 
     public void detailsGUI(String find, String name, String author, String course, String copies) {
 
-        JFrame bookFrame; //Run a new frame
-        bookFrame = new JFrame("Book Title: " + find);
-        bookFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        JFrame bookFrame;
+        bookFrame = new JFrame("Book Title: " + find);//Run a new frame
+        bookFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         bookFrame.setSize(600, 600);
 
         JPanel bookPanel = new JPanel();
@@ -116,16 +112,16 @@ public class Library {
         reserve.setFont(new Font("Arial", Font.PLAIN, 30));
         reserve.addActionListener(e -> {
 
-            bookFrame.setVisible(false);
+
 
             JFrame reserveFrame = new JFrame("Reserve Book");
-            reserveFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+            reserveFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             reserveFrame.setSize(600, 600);
 
             JPanel reservePanel = new JPanel();
 
             JTextArea reserveText = new JTextArea();
-            reserveText.setText( name + " Successfully reserved.\nPlease collect from the Library Help Desk.");
+            reserveText.setText(name + " Successfully reserved.\nPlease collect from the Library Help Desk.");
             reserveText.setFont(new Font("Arial", Font.PLAIN, 30));
             reserveText.setEditable(false);
             reservePanel.add(reserveText);
@@ -135,11 +131,12 @@ public class Library {
 
 
         });
+
         bookPanel.add(reserve);
 
         bookFrame.add(bookPanel);
         bookFrame.setVisible(true);
     }
-}
 
 
+    }
