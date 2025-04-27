@@ -1,8 +1,10 @@
 
 import javax.swing.*;
+import javax.swing.WindowConstants.*;
 import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
+
 
 
 public class Library {
@@ -62,7 +64,7 @@ public class Library {
 
         JFrame bookFrame;
         bookFrame = new JFrame("Book Title: " + find);//Run a new frame
-        bookFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        bookFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         bookFrame.setSize(600, 600);
 
         JPanel bookPanel = new JPanel();
@@ -115,7 +117,7 @@ public class Library {
 
 
             JFrame reserveFrame = new JFrame("Reserve Book");
-            reserveFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            reserveFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             reserveFrame.setSize(600, 600);
 
             JPanel reservePanel = new JPanel();
@@ -126,6 +128,13 @@ public class Library {
             reserveText.setEditable(false);
             reservePanel.add(reserveText);
 
+            JButton exit = new JButton("Exit");
+            exit.setFont(new Font("Arial", Font.PLAIN, 30));
+            exit.addActionListener(event -> {
+                reserveFrame.setVisible(false);
+            });
+
+            reservePanel.add(exit);
             reserveFrame.add(reservePanel);
             reserveFrame.setVisible(true);
 
