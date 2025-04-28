@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.table.DefaultTableModel;
 
+
     public class StudentManagementApp {
         private JFrame frame;
         private CardLayout cardLayout;
@@ -190,7 +191,28 @@ import javax.swing.table.DefaultTableModel;
             JPanel panel = new JPanel(new BorderLayout());
             panel.add(new JLabel("Manage Rooms", SwingConstants.CENTER), BorderLayout.NORTH);
 
-            JPanel center = new JPanel(new GridLayout(2, 2));
+            JPanel mainPanel = new JPanel();
+
+            JButton bookButton = new JButton("Book Room");
+            bookButton.addActionListener(e-> {
+                BookRoomGUI bookGUI = new BookRoomGUI();
+                bookGUI.BookRoomGUI();
+            });
+
+            JButton viewButton = new JButton("View Rooms");
+            viewButton.addActionListener(e-> {
+                RoomManagement roomManagement = new RoomManagement();
+                roomManagement.getRooms();
+
+            });
+
+
+            mainPanel.add(bookButton); //add buttons to panel
+            mainPanel.add(viewButton);
+            panel.add(mainPanel, BorderLayout.CENTER);
+
+
+            /*JPanel center = new JPanel(new GridLayout(2, 2));
             JTextField course = new JTextField();
             JTextField room = new JTextField();
             center.add(new JLabel("Course Name:"));
@@ -207,8 +229,9 @@ import javax.swing.table.DefaultTableModel;
             bottom.add(exit);
 
             panel.add(center, BorderLayout.CENTER);
-            panel.add(bottom, BorderLayout.SOUTH);
-            return panel;
+            panel.add(bottom, BorderLayout.SOUTH);*/
+            return panel
+            ;
         }
 
         private JPanel libraryPanel() {
@@ -217,10 +240,15 @@ import javax.swing.table.DefaultTableModel;
 
             JPanel center = new JPanel(new FlowLayout());
             JTextField search = new JTextField(20);
-            JButton find = new JButton("Find");
+            JButton searchBtn = new JButton("Find");
+            searchBtn.addActionListener(e -> {
+                String find = search.getText();
+                Library lib = new Library();
+                lib.getBook(find);
+            });
             center.add(new JLabel("Search Content:"));
             center.add(search);
-            center.add(find);
+            center.add(searchBtn);
 
             JButton exit = new JButton("Exit");
             exit.addActionListener(e -> cardLayout.show(cardPanel, "main"));

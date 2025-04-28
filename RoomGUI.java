@@ -10,13 +10,13 @@ class RoomGUI extends JFrame {
 
       JPanel mainPanel = new JPanel();
 
-      JButton bookButton = new JButton("book");
+      JButton bookButton = new JButton("Book Room");
       bookButton.addActionListener(e-> {
           BookRoomGUI bookGUI = new BookRoomGUI();
           bookGUI.BookRoomGUI();
       });
 
-      JButton viewButton = new JButton("view");
+      JButton viewButton = new JButton("View Rooms");
       viewButton.addActionListener(e-> {
           RoomManagement roomManagement = new RoomManagement();
           roomManagement.getRooms();
