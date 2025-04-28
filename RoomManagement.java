@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class RoomManagement {
 
     void bookRoom(String search) {
-        String filepath = "src\\Rooms.csv";
+        String filepath = "Rooms.csv";
         ArrayList<String> rooms = new ArrayList();
 
         try {
@@ -30,7 +30,7 @@ public class RoomManagement {
 
     void getRooms() {
 
-        try (BufferedReader read = new BufferedReader(new FileReader("src\\Rooms.csv"))) {//Read CSV
+        try (BufferedReader read = new BufferedReader(new FileReader("Rooms.csv"))) {//Read CSV
             String line;
             while ((line = read.readLine()) != null) {
                 String roomDetails = line + "\n";
