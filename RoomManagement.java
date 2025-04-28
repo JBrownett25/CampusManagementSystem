@@ -53,14 +53,26 @@ public class RoomManagement {
         viewFrame.setSize(500, 500);
 
         JPanel viewPanel = new JPanel();
+        viewPanel.setLayout(new BorderLayout());
 
+        JLabel panelTitle = new JLabel("Room Name");
+        panelTitle.setFont(new Font("Arial", Font.BOLD, 20));
 
         JTextArea roomDetails = new JTextArea();
         roomDetails.setFont(new Font("Arial", 1, 20)); //set font
         roomDetails.setEditable(false);
         roomDetails.setText(String.valueOf(rooms)); //add the arraylist
         roomDetails.append("\n");
-        viewPanel.add(roomDetails);
+
+        JButton exitButton = new JButton("Exit");
+        exitButton.addActionListener( e-> {
+            viewFrame.dispose();
+        });
+
+
+        viewPanel.add(panelTitle, BorderLayout.NORTH);
+        viewPanel.add(roomDetails, BorderLayout.CENTER);
+        viewPanel.add(exitButton, BorderLayout.SOUTH);
         viewFrame.add(viewPanel);
         viewFrame.setVisible(true);
     }
