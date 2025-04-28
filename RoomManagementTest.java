@@ -27,8 +27,7 @@ class RoomManagementTest {
         );
         Files.write(csvPath, lines);
         
-        // We would need a way to tell RoomManagement to use this test file
-        // This might require changing your code to allow injection of the file path
+
     }
     
     @Test
@@ -37,9 +36,8 @@ class RoomManagementTest {
         ArrayList<String> testRooms = new ArrayList<>();
         testRooms.add("F01\t15\tLab");
         testRooms.add("F02\t30\tLab");
-        
-        // This assumes you've extracted the formatting logic to a separate method
-        String formatted = roomManagement.formatRoomsList(testRooms);
+
+        String formatted = roomManagement.getRooms(testRooms);
         
         assertEquals("F01\t15\tLab\nF02\t30\tLab\n", formatted);
     }

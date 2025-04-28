@@ -25,12 +25,12 @@ class LibraryTest {
         );
         Files.write(csvPath, lines);
         
-        // You'll need to modify Library to accept a custom file path
+
     }
     
     @Test
     void testFindBook_ExistingBook() {
-        // After refactoring, you can test the business logic directly
+
         Library.Book book = library.findBook("Hacking101");
         
         assertNotNull(book);
