@@ -30,7 +30,7 @@ public class RoomManagement {
 
     void getRooms() {
 
-        try (BufferedReader read = new BufferedReader(new FileReader("src\\Rooms.csv"))) {//Read CSV
+        try (BufferedReader read = new BufferedReader(new FileReader("Rooms.csv"))) {//Read CSV
             String line;
             while ((line = read.readLine()) != null) {
                 String roomDetails = line + "\n";
