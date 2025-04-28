@@ -9,12 +9,6 @@ import java.util.ArrayList;
 
 public class Library {
 
-
-    /*public void runGUI() {
-        LibraryGUI libGUI = new LibraryGUI();
-        libGUI.libraryGUI(); //Method to run GUI when linked to the mainGUI
-    }*/
-
     public void getBook(String find) {
 
 

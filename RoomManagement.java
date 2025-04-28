@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class RoomManagement {
 
@@ -26,6 +27,7 @@ public class RoomManagement {
         }
     }
 
+
     ArrayList<String> rooms = new ArrayList();
 
     void getRooms() {
@@ -33,12 +35,10 @@ public class RoomManagement {
         try (BufferedReader read = new BufferedReader(new FileReader("Rooms.csv"))) {//Read CSV
             String line;
             while ((line = read.readLine()) != null) {
-                String roomDetails = line + "\n";
-                String tabs = null;
-                for (int i = 0; i < roomDetails.length(); i++) { //arraylist
-                    tabs = roomDetails.replace(",", "\t"); //replace comma with tabs.
-                }
+                String tabs = line.replace(",", "\t");//replace comma with tabs.
+
                 rooms.add(tabs);
+
             }
         } catch (IOException e) {// Catch error
             e.printStackTrace();
@@ -47,6 +47,8 @@ public class RoomManagement {
         viewGUi(rooms);
 
     }
+
+
     void viewGUi(ArrayList<String> rooms){
         JFrame viewFrame = new JFrame("Room Management");
         viewFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -61,8 +63,12 @@ public class RoomManagement {
         JTextArea roomDetails = new JTextArea();
         roomDetails.setFont(new Font("Arial", 1, 20)); //set font
         roomDetails.setEditable(false);
-        roomDetails.setText(String.valueOf(rooms)); //add the arraylist
-        roomDetails.append("\n");
+
+        StringBuilder builder = new StringBuilder();
+        for (String room : rooms) {
+            builder.append(room).append("\n");
+        }
+        roomDetails.setText(builder.toString());
 
         JButton exitButton = new JButton("Exit");
         exitButton.addActionListener( e-> {
