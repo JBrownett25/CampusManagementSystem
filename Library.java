@@ -1,10 +1,8 @@
 
 import javax.swing.*;
-import javax.swing.WindowConstants.*;
 import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
-
 
 
 public class Library {
@@ -51,7 +49,7 @@ public class Library {
         }
     }
 
-    JTextArea bookTitle, bookAuthor, bookCourse, bookCount;
+    JTextArea bookTitle, bookAuthor, bookCourse,bookCount;
     JLabel bookTitleLabel, bookAuthorLabel, bookCourseLabel, bookCountLabel;
 
     public void detailsGUI(String find, String name, String author, String course, String copies) {
@@ -108,7 +106,8 @@ public class Library {
         reserve.setFont(new Font("Arial", Font.PLAIN, 30));
         reserve.addActionListener(e -> {
 
-
+            String value = bookCount.getText();
+            updateCount(value);
 
             JFrame reserveFrame = new JFrame("Reserve Book");
             reserveFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -122,24 +121,63 @@ public class Library {
             reserveText.setEditable(false);
             reservePanel.add(reserveText);
 
-            JButton exit = new JButton("Exit");
+
+            JButton exit = new JButton("Confirm & Exit");
             exit.setFont(new Font("Arial", Font.PLAIN, 30));
             exit.addActionListener(event -> {
+
                 reserveFrame.setVisible(false);
             });
-
             reservePanel.add(exit);
             reserveFrame.add(reservePanel);
             reserveFrame.setVisible(true);
 
-
         });
 
         bookPanel.add(reserve);
-
         bookFrame.add(bookPanel);
         bookFrame.setVisible(true);
     }
 
+
+    String updateCount(String value) {
+        int prevCount = 0;
+        String newCount = "";
+        String file = "Library.csv";
+        String temp = "temp.csv";
+
+        prevCount = Integer.parseInt(value); //convert to int.
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file));//read old file
+             BufferedWriter wr = new BufferedWriter(new FileWriter(temp));) {//write to new file
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] count = line.split(",");
+                for (int i = 0; i < count.length; i++) {
+                    if (count[i].equals(String.valueOf(prevCount))) {
+                        newCount = String.valueOf(prevCount - 1); //update count and make String
+                        count[i] = newCount; //replace value with new updated value
+                        System.out.println("New count: " + count[i] + ". Count Updated");//Check count updates and confirms to user.
+
+                    }
+                }
+                wr.write(String.join(",", count)); //Join String bu commas for CSV.
+                wr.newLine();
+            }
+
+            File originalFile = new File(file); //Declare objects for old and new file.
+            File updated = new File(temp);
+
+            if (originalFile.exists()) {
+                originalFile.delete(); //Delete original
+                updated.renameTo(new File("Library.csv")); //make temp Library.csv
+            }
+
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return file;
+    }
 
     }
