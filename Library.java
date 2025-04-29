@@ -141,8 +141,8 @@ public class Library {
 
 
     String updateCount(String value) {
-        int prevCount = 0;
-        String newCount = "";
+        int prevCount;
+        String newCount;
         String file = "Library.csv";
         String temp = "temp.csv";
 
