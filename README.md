@@ -116,5 +116,4 @@ Please open an Issue or submit a Pull Request to suggest improvements or report 
 
 ## 📬 Contact
 
-For queries or collaborations, feel free to reach out:
-- GitHub: [your-username](https://github.com/your-username)
+For queries or collaborations, feel free to reach out.
